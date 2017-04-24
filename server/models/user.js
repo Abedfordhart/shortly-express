@@ -7,6 +7,7 @@ class Users extends Model{
 	constructor(){
 		super('users');
 	}
+
 }
 
-module.exports = new Users();
+module.exports = new Users();   

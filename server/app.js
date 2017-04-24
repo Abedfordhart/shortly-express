@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 
+
 app.get('/', 
 (req, res) => {
   res.render('index');
@@ -87,12 +88,14 @@ app.post('/links',
 
 app.post('/signup', (req, res, next) => {
   req.body.password = utils.hash(req.body.password)
-  models.Users.create(req.body);
-  res.redirect('/signup')
-  // fs.readFile('../views/signup.ejs', function(request, response){
-  //   response.writeHeader(200);
-  //   response.end(response);
-  // })
+  models.Users.create(req.body).then(function(resolve){
+    console.log('WORKS')
+    res.redirect('/')
+  }, function(reject){
+    console.log('DOESNT WORK')
+    res.redirect('/signup')
+  });
+  
 
 })
 
