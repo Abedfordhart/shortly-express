@@ -5,7 +5,8 @@ const partials = require('express-partials');
 const bodyParser = require('body-parser');
 const Auth = require('./middleware/auth');
 const models = require('./models');
-
+//const crypto = require('crypto')
+const fs = require('fs')
 const app = express();
 
 app.set('views', `${__dirname}/views`);
@@ -80,6 +81,20 @@ app.post('/links',
 // Write your authentication routes here
 /************************************************************/
 
+// app.get('/login', (req, res, next) =>{
+//   model.Users.
+// })
+
+app.post('/signup', (req, res, next) => {
+  req.body.password = utils.hash(req.body.password)
+  models.Users.create(req.body);
+  res.redirect('/signup')
+  // fs.readFile('../views/signup.ejs', function(request, response){
+  //   response.writeHeader(200);
+  //   response.end(response);
+  // })
+
+})
 
 
 /************************************************************/
