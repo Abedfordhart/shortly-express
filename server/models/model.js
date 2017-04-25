@@ -27,9 +27,7 @@ class Model {
     console.log('OPTIONS', options)
     let parsedOptions = parseData(options);
     let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedOptions.string.join(' AND ')}`;
-    return executeQuery(queryString, parsedOptions.values).spread(results => results).then(function(resolve){
-      console.log('HELLO')
-    });
+    return executeQuery(queryString, parsedOptions.values).spread(results => results);
   }
 
   create(options) {

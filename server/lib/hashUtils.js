@@ -5,5 +5,10 @@ const crypto = require('crypto');
 /************************************************************/
 
 exports.hash = (password)=> {
-	return JSON.stringify(crypto.createHmac('sha256', password));
+	//console.log(crypto.createHmac('sha256', password))
+	return crypto.createHmac('sha256', password).digest('hex')
 };
+
+//.get(req.body)
+
+//.get('username' : req.body.username, 'password': hash(req.body.password))

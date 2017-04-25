@@ -89,21 +89,25 @@ app.post('/links',
 app.post('/signup', (req, res, next) => {
   req.body.password = utils.hash(req.body.password);
   models.Users.create(req.body).then(function(resolve){
-    res.redirect('/')
+    res.redirect('/');
   }, function(reject){
-    res.redirect('/signup')
+    res.redirect('/signup');
   });
   
 
 })
 
 app.post('/login', (req, res, next) => {
-  
   req.body.password = utils.hash(req.body.password);
-  models.Users.get(req.body).then(function(resolve){
-    res.redirect('/')
-  }, function(reject){
-    res.redirect('/login')
+  models.Users.get(req.body).then((results)=> {
+    console.log('login test',results)
+    if(results){
+      res.redirect('/');
+      res.end()
+    } else {
+      res.redirect('/login')
+      res.end()
+    }
   });
 })
 
