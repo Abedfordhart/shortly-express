@@ -5,8 +5,7 @@ const partials = require('express-partials');
 const bodyParser = require('body-parser');
 const Auth = require('./middleware/auth');
 const models = require('./models');
-//const crypto = require('crypto')
-const fs = require('fs')
+const cookieParser = require('./middleware/cookieParser');
 const app = express();
 
 app.set('views', `${__dirname}/views`);
@@ -100,7 +99,6 @@ app.post('/signup', (req, res, next) => {
 app.post('/login', (req, res, next) => {
   req.body.password = utils.hash(req.body.password);
   models.Users.get(req.body).then((results)=> {
-    console.log('login test',results)
     if(results){
       res.redirect('/');
       res.end()

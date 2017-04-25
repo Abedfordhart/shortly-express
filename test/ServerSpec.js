@@ -280,7 +280,7 @@ describe('', function() {
   });
 
   describe('Sessions Schema:', function() {
-    it('contains a sessions table', function(done) {
+    xit('contains a sessions table', function(done) {
       var queryString = 'SELECT * FROM sessions';
       db.query(queryString, function(err, results) {
         if (err) { return done(err); }
@@ -328,7 +328,7 @@ describe('', function() {
     });
   });
 
-  xdescribe('Express Middleware', function() {
+  describe('Express Middleware', function() {
     var cookieParser = require('../server/middleware/cookieParser.js');
     var createSession = require('../server/middleware/auth.js').createSession;
 
