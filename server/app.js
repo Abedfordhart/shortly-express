@@ -17,17 +17,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static files from ../public directory
 app.use(express.static(path.join(__dirname, '../public')));
-
+app.use(cookieParser);
 
 
 app.get('/', 
 (req, res) => {
-  res.render('index');
+  Auth.createSession(req, res, next);
+  //res.render('index');
 });
 
 app.get('/create', 
 (req, res) => {
-  res.render('index');
+  //res.render('index');
 });
 
 app.get('/links', 
@@ -113,7 +114,7 @@ app.post('/login', (req, res, next) => {
 // Handle the code parameter route last - if all other routes fail
 // assume the route is a short code and try and handle it here.
 // If the short-code doesn't exist, send the user to '/'
-/************************************************************/
+/***********************************************************/
 
 app.get('/:code', (req, res, next) => {
 
