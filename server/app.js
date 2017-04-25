@@ -87,18 +87,25 @@ app.post('/links',
 // })
 
 app.post('/signup', (req, res, next) => {
-  req.body.password = utils.hash(req.body.password)
+  req.body.password = utils.hash(req.body.password);
   models.Users.create(req.body).then(function(resolve){
-    console.log('WORKS')
     res.redirect('/')
   }, function(reject){
-    console.log('DOESNT WORK')
     res.redirect('/signup')
   });
   
 
 })
 
+app.post('/login', (req, res, next) => {
+  
+  req.body.password = utils.hash(req.body.password);
+  models.Users.get(req.body).then(function(resolve){
+    res.redirect('/')
+  }, function(reject){
+    res.redirect('/login')
+  });
+})
 
 /************************************************************/
 // Handle the code parameter route last - if all other routes fail
